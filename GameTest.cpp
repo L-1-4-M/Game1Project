@@ -57,9 +57,11 @@ void creatMap(char map[][20])
          map[j][19] = '#';
       }
    }
-   //Creat walls in the center
-   for(int i = 8; i < 13; i++) {
-      for(int j = 8; j < 13; j++) {
+   //Create walls in the center
+   for(int i = 8; i < 13; i++)
+   {
+      for(int j = 8; j < 13; j++)
+      {
          map[i][j] = '#';
       }
    }
@@ -92,22 +94,24 @@ void placeChar(char map[][20],int charPosition[][3])
    charPosition[numChars][2] = y;
    numChars++;
 }
-
+//Play Enemy
 void placeEnemy(char map[][20],int charPosition[][3])
 {
    int row,column;
+   //Keep placing the enemy until he is placed not on the floor or hero
    do
    {
-      row =rand()%20;
-      column =rand()%20;
+      row =1+rand()%18;
+      column =1+rand()%18;
    }while(map[row][column] != '.');
    map[row][column] = 'E';
+   //Store enemy's coordinates
    charPosition[numChars][0] = 2;
    charPosition[numChars][1] = row;
    charPosition[numChars][2] = column;
    numChars++;
 }
-
+//Character movement
 void moveChar(char map[][20], char move,int charPosition[][3])
 {
    int currentI,currentJ;
