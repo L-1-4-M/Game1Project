@@ -33,7 +33,7 @@ int main()
       enemyMove(map,charPosition);
       printMap(map);
       cout << charDistance(0,1,charPosition) << endl;
-   }while(move == 'a' ||move == 'a' ||move == 's' ||move == 'd' ||move == 'w');
+   }while(move == 'a'||move == 's' ||move == 'd' ||move == 'w');
 }
 
 void creatMap(char map[][20])
