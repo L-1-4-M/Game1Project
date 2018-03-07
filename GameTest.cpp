@@ -33,7 +33,7 @@ int main()
       enemyMove(map,charPosition);
       printMap(map);
       cout << charDistance(0,1,charPosition) << endl;
-   }while(move == 'a'||move == 's' ||move == 'd' ||move == 'w');
+   }while(move == 'a' ||move == 's' ||move == 'd' ||move == 'w');
 }
 
 void creatMap(char map[][20])
@@ -53,6 +53,11 @@ void creatMap(char map[][20])
          map[i+19][j] = '#';
          map[j][0] = '#';
          map[j][19] = '#';
+      }
+   }
+   for(int i = 8; i < 13; i++) {
+      for(int j = 8; j < 13; j++) {
+         map[i][j] = '#';
       }
    }
 }
@@ -85,9 +90,9 @@ void placeEnemy(char map[][20],int charPosition[][3])
    int row,column;
    do
    {
-      row =1+rand()%18;
-      column =1+rand()%18;
-   }while(map[row][column] == 'A');
+      row =rand()%20;
+      column =rand()%20;
+   }while(map[row][column] == 'A' || map[row][column] == '#');
    map[row][column] = 'E';
    charPosition[numChars][0] = 2;
    charPosition[numChars][1] = row;
@@ -153,40 +158,27 @@ void enemyMove(char map[][20],int charPosition[][3])
       dist3 = checkDistance(0,currentI,currentJ+1,charPosition);
       dist4 = checkDistance(0,currentI,currentJ-1,charPosition);
       smallD = min(min(dist1,dist2),min(dist3,dist4));
-      if(dist1 == smallD)
-      {
-         if(map[currentI+1][currentJ] != '#')
-         {
-            row = currentI+1;
-            column = currentJ;
-            cout << "MOVE DOWN" << endl;
-         }
-      }else if(dist2 == smallD)
-      {
-         if(map[currentI-1][currentJ] != '#')
-         {
-            row = currentI-1;
-            column = currentJ;
-            cout << "MOVE UP" << endl;
-         }
-      }else if(dist3 == smallD)
-      {
-         if(map[currentI][currentJ+1] != '#')
-         {
-            row = currentI;
-            column = currentJ+1;
-            cout << "MOVE RIGHT" << endl;
-         }
-      }else
-      {
-         if(map[currentI][currentJ-1] != '#')
-         {
-            row = currentI;
-            column = currentJ-1;
-            cout << "MOVE LEFT" << endl;
-         }
+      int moves[2] = {};
+      if(dist1 == smallD) {
+         moves[0] = 1;
+         moves[1] = 0;
       }
-      
+      else if(dist2 == smallD) {
+         moves[0] = -1;
+         moves[1] = 0;
+      }
+      else if(dist3 == smallD) {
+         moves[0] = 0;
+         moves[1] = 1;
+      }
+      else {
+         moves[0] = 0;
+         moves[1] = -1;
+      }
+      if(map[currentI + moves[0]][currentJ + moves [1]] != '#'){
+         row = currentI + moves[0];
+         column = currentJ + moves [1];
+      }
    }
    map[currentI][currentJ] = '.';
    map[row][column] = 'E';
