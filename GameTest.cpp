@@ -80,7 +80,12 @@ void printMap(char map[][20])
 //Places the character in a random spot
 void placeChar(char map[][20],int charPosition[][3])
 {
-   int x = 1+rand()%18,y = 1+rand()%18;
+   int x, y;
+   do
+   {
+      x =1+rand()%18;
+      y =1+rand()%18;
+   }while(map[x][y] != '.');
    map[x][y] = 'A';
    charPosition[numChars][0] = 1;
    charPosition[numChars][1] = x;
@@ -95,7 +100,7 @@ void placeEnemy(char map[][20],int charPosition[][3])
    {
       row =rand()%20;
       column =rand()%20;
-   }while(map[row][column] == 'A' || map[row][column] == '#');
+   }while(map[row][column] != '.');
    map[row][column] = 'E';
    charPosition[numChars][0] = 2;
    charPosition[numChars][1] = row;
