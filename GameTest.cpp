@@ -35,9 +35,10 @@ int main()
       cout << charDistance(0,1,charPosition) << endl;
    }while(move == 'a' ||move == 's' ||move == 'd' ||move == 'w');
 }
-
+//Creates Map
 void creatMap(char map[][20])
 {
+   //Initalize the floor
    for(int i = 0;i<20;i++)
    {
       for(int j = 0;j<20;j++)
@@ -45,6 +46,7 @@ void creatMap(char map[][20])
          map[i][j] = '.';
       }
    }
+   //Create outer walls
    for(int i = 0;i<1;i++)
    {
       for(int j = 0;j<20;j++)
@@ -55,13 +57,14 @@ void creatMap(char map[][20])
          map[j][19] = '#';
       }
    }
+   //Creat walls in the center
    for(int i = 8; i < 13; i++) {
       for(int j = 8; j < 13; j++) {
          map[i][j] = '#';
       }
    }
 }
-
+//Prints full map
 void printMap(char map[][20])
 {
    for(int i = 0;i<20;i++)
@@ -74,7 +77,7 @@ void printMap(char map[][20])
    }
    cout << endl;
 }
-
+//Places the character in a random spot
 void placeChar(char map[][20],int charPosition[][3])
 {
    int x = 1+rand()%18,y = 1+rand()%18;
